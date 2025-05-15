@@ -1,0 +1,25 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+## 技术方案
+1. Astro
+2. React
+3. shadcn
+4. tailwindcss
+5. TypeScript
+
+## 包管理工具
+pnpm
+
+## 规范
+### 组件规范
+错误：
+`components/xxx.tsc`
+正确：
+`components/xxx/index.tsc` 方便扩展子组件
+
