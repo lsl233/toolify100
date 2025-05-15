@@ -1,11 +1,526 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+  <div class="min-h-screen bg-stone-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-10 shadow-sm">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <div class="h-8 w-8 mr-2 relative">
+                <div class="w-full h-full text-amber-600">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <span class="font-bold text-xl text-stone-800">文本计数</span>
+            </div>
+            <div class="hidden md:ml-6 md:flex md:space-x-6">
+              <a href="#" class="text-amber-600 font-medium border-b-2 border-amber-600 px-1 py-2">
+                首页
+              </a>
+              <a href="#" class="text-stone-600 hover:text-amber-600 px-1 py-2 transition-colors">
+                功能
+              </a>
+              <a href="#" class="text-stone-600 hover:text-amber-600 px-1 py-2 transition-colors">
+                模板
+              </a>
+              <a href="#" class="text-stone-600 hover:text-amber-600 px-1 py-2 transition-colors">
+                关于
+              </a>
+            </div>
+          </div>
+          <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-stone-600 hover:text-amber-600 focus:outline-none">
+              <div class="w-6 h-6 flex flex-col justify-center space-y-1.5">
+                <span class="block w-full h-0.5 bg-current"></span>
+                <span class="block w-full h-0.5 bg-current"></span>
+                <span class="block w-full h-0.5 bg-current"></span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="md:hidden bg-white border-b border-stone-200 shadow-sm hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-amber-600 bg-amber-50">
+            首页
+          </a>
+          <a
+            href="#"
+            class="block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-amber-600 hover:bg-amber-50"
+          >
+            功能
+          </a>
+          <a
+            href="#"
+            class="block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-amber-600 hover:bg-amber-50"
+          >
+            模板
+          </a>
+          <a
+            href="#"
+            class="block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-amber-600 hover:bg-amber-50"
+          >
+            关于
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+      <header class="mb-8 text-center">
+        <h1 class="text-3xl font-bold text-stone-800 mb-2">在线文本计数器</h1>
+        <p class="text-stone-600">实时统计Token、字数和字符数，优化您的内容</p>
+      </header>
+
+      <div class="mb-8">
+        <div class="relative bg-white rounded-lg shadow-md border border-stone-200">
+          <textarea
+            id="text-input"
+            placeholder="在此粘贴或输入您的文本..."
+            class="w-full min-h-[200px] p-4 text-stone-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 resize-y"
+          ></textarea>
+          <button
+            id="clear-button"
+            class="absolute top-3 right-3 p-1.5 bg-stone-100 hover:bg-stone-200 rounded-full text-stone-500 hover:text-stone-700 transition-colors hidden"
+            aria-label="清除文本"
+          >
+            <div class="w-4 h-4 flex items-center justify-center">
+              <div class="w-3 h-0.5 bg-current absolute rotate-45"></div>
+              <div class="w-3 h-0.5 bg-current absolute -rotate-45"></div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white rounded-lg shadow-md border border-stone-200 p-4 hover:shadow-lg transition-shadow">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center">
+              <span class="text-stone-700 font-medium">Token 数</span>
+              <div class="relative ml-1 group">
+                <div class="w-4 h-4 text-amber-500 cursor-help">
+                  <div class="w-4 h-4 rounded-full border border-amber-500 flex items-center justify-center">
+                    <span class="text-xs">i</span>
+                  </div>
+                </div>
+                <div class="absolute left-0 bottom-full mb-2 w-64 p-2 bg-stone-800 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity z-10">
+                  Token是AI模型处理文本的基本单位。此计数基于估算，实际数量可能因模型而异。
+                </div>
+              </div>
+            </div>
+            <div class="flex items-baseline">
+              <span id="token-count" class="text-2xl font-bold text-amber-600">0</span>
+              <span class="ml-1 text-xs text-stone-500">tokens</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md border border-stone-200 p-4 hover:shadow-lg transition-shadow">
+          <div class="flex justify-between items-center">
+            <span class="text-stone-700 font-medium">字数</span>
+            <div class="flex items-baseline">
+              <span id="word-count" class="text-2xl font-bold text-amber-600">0</span>
+              <span class="ml-1 text-xs text-stone-500">字</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md border border-stone-200 p-4 hover:shadow-lg transition-shadow">
+          <div class="flex justify-between items-center">
+            <span class="text-stone-700 font-medium">字符数 (含空格)</span>
+            <div class="flex items-baseline">
+              <span id="chars-with-spaces" class="text-2xl font-bold text-amber-600">0</span>
+              <span class="ml-1 text-xs text-stone-500">字符</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md border border-stone-200 p-4 hover:shadow-lg transition-shadow">
+          <div class="flex justify-between items-center">
+            <span class="text-stone-700 font-medium">字符数 (不含空格)</span>
+            <div class="flex items-baseline">
+              <span id="chars-without-spaces" class="text-2xl font-bold text-amber-600">0</span>
+              <span class="ml-1 text-xs text-stone-500">字符</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md border border-stone-200 p-6 mb-8">
+        <h2 class="text-xl font-semibold text-stone-800 mb-4 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-amber-600" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM5 19V5H19V19H5ZM7 10H9V17H7V10ZM11 7H13V17H11V7ZM15 13H17V17H15V13Z"
+              fill="currentColor"
+            />
+          </svg>
+          SEO文本模板
+        </h2>
+        <p class="text-stone-600 mb-4">选择一个模板快速开始您的内容创作：</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+          <button
+            data-template="blog"
+            class="template-button p-3 border border-stone-200 rounded-lg hover:bg-amber-50 hover:border-amber-200 transition-colors text-stone-700 text-sm font-medium"
+          >
+            博客文章
+          </button>
+          <button
+            data-template="product"
+            class="template-button p-3 border border-stone-200 rounded-lg hover:bg-amber-50 hover:border-amber-200 transition-colors text-stone-700 text-sm font-medium"
+          >
+            产品描述
+          </button>
+          <button
+            data-template="meta"
+            class="template-button p-3 border border-stone-200 rounded-lg hover:bg-amber-50 hover:border-amber-200 transition-colors text-stone-700 text-sm font-medium"
+          >
+            Meta描述
+          </button>
+          <button
+            data-template="social"
+            class="template-button p-3 border border-stone-200 rounded-lg hover:bg-amber-50 hover:border-amber-200 transition-colors text-stone-700 text-sm font-medium"
+          >
+            社交媒体帖子
+          </button>
+        </div>
+      </div>
+
+      <!-- 核心概念解释模块 -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-stone-800 mb-4">核心概念解释</h2>
+
+        <div class="accordion" data-is-open="true">
+          <div class="border border-stone-200 rounded-lg mb-4 overflow-hidden">
+            <button
+              class="accordion-header w-full p-4 text-left bg-stone-50 hover:bg-stone-100 flex justify-between items-center"
+            >
+              <h3 class="text-lg font-medium text-stone-800">什么是Token？为什么需要计算Token？</h3>
+              <div class="accordion-icon">
+                <div class="w-5 h-5 text-amber-600 flex items-center justify-center">
+                  <div class="up hidden">↑</div>
+                  <div class="down">↓</div>
+                </div>
+              </div>
+            </button>
+            <div class="accordion-content p-4 bg-white">
+              <div class="text-stone-700 space-y-3">
+                <p>
+                  <strong>Token</strong>
+                  是AI模型（如GPT-3.5、GPT-4等）处理文本的基本单位。在AI语言模型中，文本被分解成一系列token进行处理，而不是直接处理单词或字符。
+                </p>
+                <p>
+                  对于英文文本，一个token通常对应约4个字符，或者大约为3/4个单词。例如，单词"hamburger"可能被分解为"ham"、"bur"和"ger"三个token。而对于中文文本，通常每个汉字被视为1-2个token。
+                </p>
+                <p>
+                  <strong>为什么需要计算Token？</strong>
+                </p>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>
+                    <strong>成本计算</strong>
+                    ：大多数AI服务提供商（如OpenAI）按token数量收费。了解您的文本包含多少token可以帮助您估算API调用的成本。
+                  </li>
+                  <li>
+                    <strong>长度限制</strong>：AI模型通常有token数量限制（如GPT-4的上下文窗口为8K或32K
+                    token）。计算token数可以确保您的文本不会超出这些限制。
+                  </li>
+                  <li>
+                    <strong>性能优化</strong>
+                    ：较少的token通常意味着更快的响应时间和更低的成本。优化提示词以减少token数量是AI应用开发的重要技巧。
+                  </li>
+                </ul>
+                <p>我们的Token计数器提供了一个便捷的方式来估算您的文本将消耗多少token，帮助您优化AI交互和控制成本。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion" data-is-open="false">
+          <div class="border border-stone-200 rounded-lg mb-4 overflow-hidden">
+            <button
+              class="accordion-header w-full p-4 text-left bg-stone-50 hover:bg-stone-100 flex justify-between items-center"
+            >
+              <h3 class="text-lg font-medium text-stone-800">什么是字数统计？</h3>
+              <div class="accordion-icon">
+                <div class="w-5 h-5 text-amber-600 flex items-center justify-center">
+                  <div class="up hidden">↑</div>
+                  <div class="down">↓</div>
+                </div>
+              </div>
+            </button>
+            <div class="accordion-content p-4 bg-white hidden">
+              <div class="text-stone-700 space-y-3">
+                <p>
+                  <strong>字数统计</strong>是衡量文本长度的传统方式，计算文本中包含的单词或汉字数量。
+                </p>
+                <p>
+                  对于英文和其他使用空格分隔单词的语言，字数通常是指被空格或标点符号分隔的单词数量。对于中文等不使用空格分隔的语言，字数通常是指汉字的数量。
+                </p>
+                <p>
+                  <strong>字数统计的应用场景：</strong>
+                </p>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>
+                    <strong>学术写作</strong>：论文、作业通常有最低或最高字数要求。
+                  </li>
+                  <li>
+                    <strong>内容创作</strong>：博客文章、新闻稿等需要控制适当的长度以保持读者兴趣。
+                  </li>
+                  <li>
+                    <strong>出版</strong>：书籍、杂志文章等按字数计费或规划篇幅。
+                  </li>
+                  <li>
+                    <strong>阅读时间估算</strong>：根据平均阅读速度（如每分钟200-250个单词），可以估算阅读文本所需的时间。
+                  </li>
+                </ul>
+                <p>我们的字数统计功能针对中英文混合文本进行了优化，能够准确计算各种语言的字数。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion" data-is-open="false">
+          <div class="border border-stone-200 rounded-lg mb-4 overflow-hidden">
+            <button
+              class="accordion-header w-full p-4 text-left bg-stone-50 hover:bg-stone-100 flex justify-between items-center"
+            >
+              <h3 class="text-lg font-medium text-stone-800">什么是字符数统计？</h3>
+              <div class="accordion-icon">
+                <div class="w-5 h-5 text-amber-600 flex items-center justify-center">
+                  <div class="up hidden">↑</div>
+                  <div class="down">↓</div>
+                </div>
+              </div>
+            </button>
+            <div class="accordion-content p-4 bg-white hidden">
+              <div class="text-stone-700 space-y-3">
+                <p>
+                  <strong>字符数统计</strong>是计算文本中包含的所有字符（包括字母、数字、标点符号、空格等）的数量。
+                </p>
+                <p>我们提供两种字符计数方式：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>
+                    <strong>字符数（含空格）</strong>：计算文本中的所有字符，包括空格、制表符和换行符等空白字符。
+                  </li>
+                  <li>
+                    <strong>字符数（不含空格）</strong>：只计算非空白字符，排除空格、制表符和换行符等。
+                  </li>
+                </ul>
+                <p>
+                  <strong>字符数统计的应用场景：</strong>
+                </p>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>
+                    <strong>社交媒体</strong>：Twitter（280字符）、微博（2000字符）等平台有字符限制。
+                  </li>
+                  <li>
+                    <strong>短信/SMS</strong>：传统短信通常限制在160个字符以内。
+                  </li>
+                  <li>
+                    <strong>元描述（Meta Description）</strong>：SEO优化中，建议将元描述控制在150-160个字符以内。
+                  </li>
+                  <li>
+                    <strong>数据存储</strong>：在数据库设计中，了解字符数有助于规划字段长度和存储需求。
+                  </li>
+                </ul>
+                <p>精确的字符计数对于需要严格控制文本长度的场景尤为重要，我们的工具提供实时、准确的字符统计功能。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="text-center text-stone-500 text-sm mt-12 pb-8">
+        <div class="flex justify-center items-center mb-2">
+          <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5 text-amber-600 mr-1">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"
+              fill="currentColor"
+            />
+          </svg>
+          <span class="font-medium text-stone-600">文本计数</span>
+        </div>
+        <p>© {new Date().getFullYear()} 文本计数工具 | 帮助内容创作者优化文本</p>
+      </footer>
+    </div>
+  </div>
+
+  <script is:inline>
+    // SEO文本模板
+    const TEXT_TEMPLATES = {
+      blog: `# 博客标题：[在此输入您的标题]
+
+## 引言
+[在此处简要介绍文章主题，吸引读者注意力。包含1-2个关键词。]
+
+## 第一部分
+[详细展开第一个要点，确保包含2-3个相关关键词。]
+
+## 第二部分
+[详细展开第二个要点，添加数据或案例支持您的观点。]
+
+## 第三部分
+[详细展开第三个要点，可以添加引用或专家观点。]
+
+## 总结
+[总结文章要点，并提供行动建议。再次强调1-2个主要关键词。]
+
+标签: [关键词1], [关键词2], [关键词3]`,
+
+      product: `# [产品名称]
+
+## 产品概述
+[简洁地描述产品是什么，解决什么问题，适合什么人群。]
+
+## 主要特点
+- [特点1]：[简短描述]
+- [特点2]：[简短描述]
+- [特点3]：[简短描述]
+
+## 技术规格
+- 尺寸：[填写尺寸]
+- 重量：[填写重量]
+- 材质：[填写材质]
+- 颜色选项：[列出颜色]
+
+## 为什么选择我们
+[描述产品的独特卖点和竞争优势]
+
+关键词: [关键词1], [关键词2], [关键词3]`,
+
+      meta: `[在这里用150-160个字符描述您的页面内容，包含主要关键词。确保描述吸引人，能够提高点击率。]`,
+
+      social: `📢 [引人注目的开场白]
+
+🔍 [分享有价值的信息或观点]
+
+💡 [提供一个洞见或建议]
+
+🔗 [号召性用语] [链接]
+
+#[话题标签1] #[话题标签2] #[话题标签3]`,
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const textInput = document.getElementById('text-input');
+      const clearButton = document.getElementById('clear-button');
+      const tokenCount = document.getElementById('token-count');
+      const wordCount = document.getElementById('word-count');
+      const charsWithSpaces = document.getElementById('chars-with-spaces');
+      const charsWithoutSpaces = document.getElementById('chars-without-spaces');
+      const templateButtons = document.querySelectorAll('.template-button');
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const accordions = document.querySelectorAll('.accordion');
+
+      // Mobile menu toggle
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+
+      // Text input event
+      if (textInput) {
+        textInput.addEventListener('input', function() {
+          updateCounts(this.value);
+          toggleClearButton();
+        });
+      }
+
+      // Clear button
+      if (clearButton && textInput) {
+        clearButton.addEventListener('click', function() {
+          textInput.value = '';
+          updateCounts('');
+          toggleClearButton();
+        });
+      }
+
+      // Template buttons
+      templateButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          if (textInput) {
+            const templateName = this.dataset.template;
+            if (templateName && TEXT_TEMPLATES[templateName]) {
+              textInput.value = TEXT_TEMPLATES[templateName];
+              updateCounts(textInput.value);
+              toggleClearButton();
+            }
+          }
+        });
+      });
+
+      // Accordion functionality
+      accordions.forEach(accordion => {
+        const header = accordion.querySelector('.accordion-header');
+        const content = accordion.querySelector('.accordion-content');
+        const upIcon = accordion.querySelector('.up');
+        const downIcon = accordion.querySelector('.down');
+        
+        if (header && content && upIcon && downIcon) {
+          // Set initial state
+          const isOpen = accordion.dataset.isOpen === 'true';
+          if (isOpen) {
+            content.classList.remove('hidden');
+            upIcon.classList.remove('hidden');
+            downIcon.classList.add('hidden');
+          }
+          
+          header.addEventListener('click', function() {
+            content.classList.toggle('hidden');
+            upIcon.classList.toggle('hidden');
+            downIcon.classList.toggle('hidden');
+          });
+        }
+      });
+
+      // Function to update counts
+      function updateCounts(text) {
+        if (!text) text = '';
+        
+        // Simple token estimation (roughly 4 chars per token for English, 1-2 for Chinese)
+        const chineseChars = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
+        const nonChineseChars = text.length - chineseChars;
+        const tokens = Math.ceil(chineseChars * 1.5 + nonChineseChars * 0.25);
+        
+        // Count words (Chinese characters as words + space-separated words)
+        const nonChineseWords = text.trim().split(/\s+/).filter(Boolean).length;
+        const words = chineseChars + nonChineseWords;
+        
+        if (tokenCount) tokenCount.textContent = String(tokens);
+        if (wordCount) wordCount.textContent = String(words);
+        if (charsWithSpaces) charsWithSpaces.textContent = String(text.length);
+        if (charsWithoutSpaces) charsWithoutSpaces.textContent = String(text.replace(/\s/g, '').length);
+      }
+
+      // Toggle clear button visibility
+      function toggleClearButton() {
+        if (clearButton && textInput) {
+          if (textInput.value) {
+            clearButton.classList.remove('hidden');
+          } else {
+            clearButton.classList.add('hidden');
+          }
+        }
+      }
+
+      // Initial counts update
+      updateCounts('');
+    });
+  </script>
+</BaseLayout>
