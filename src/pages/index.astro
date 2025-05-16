@@ -5,197 +5,120 @@ import Footer from "../components/Footer.astro";
 import ModelTable from "../components/ModelTable/index.tsx";
 import TextInput from "../components/TextInput/index.tsx";
 import TokenCounter from "../components/TokenCounter/index.tsx";
-import Test from "../components/Test/index.tsx";
+import InfoAccordion from "../components/InfoAccordion.astro";
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Free Token Counter | Calculate AI Model Tokens"
+  description="Use our free tool to calculate tokens for GPT, Claude, and more instantly—no registration required."
+>
   <div class="min-h-screen bg-stone-50">
     <Header />
-
-		<!-- <Test client:load /> -->
-
+    <div class="mb-8 text-center pt-8">
+      <h1 class="text-3xl font-bold text-stone-800 mb-2">
+        Free Token Counter & Pricing Calculator
+      </h1>
+      <p class="text-stone-600">
+        Instantly calculate token count and pricing for your text in AI models
+        like GPT, Claude, and Llama. Simple, free, and no sign-up needed.
+      </p>
+    </div>
     <div class="container mx-auto px-4">
       <TextInput client:load />
       <TokenCounter client:load />
       <section class="mb-12">
-        <h2 class="text-2xl font-bold text-stone-800 mb-4">模型价格</h2>
+        <!-- <h2 class="text-2xl font-bold text-stone-800 mb-4">模型价格</h2> -->
         <ModelTable client:load />
+      </section>
+
+      <section class="mb-12">
+				<h2 class="text-2xl font-bold text-stone-800 mb-4">Key Features of Our Token Counter</h2>
+        <InfoAccordion
+          expandable={false}
+        >
+          <ol class="list-decimal pl-5 space-y-1">
+            <li>
+              Clear Pricing Tables for Each AI Model，View token prices for different models in an easy-to-read format.  
+            </li>
+            <li>
+              Real-Time Token Calculation, Get instant token counts as you input
+              your text. and price.
+            </li>
+            <li>
+              No Registration Required, Completely Free, Use the tool without
+              any account or payment.
+            </li>
+          </ol>
+        </InfoAccordion>
       </section>
 
       <!-- 核心概念解释模块 -->
       <section class="mb-12">
-        <h2 class="text-2xl font-bold text-stone-800 mb-4">核心概念解释</h2>
-
-        <div class="accordion" data-is-open="true">
-          <div class="border border-stone-200 rounded-lg mb-4 overflow-hidden">
-            <button
-              class="accordion-header w-full p-4 text-left bg-stone-50 hover:bg-stone-100 flex justify-between items-center"
-            >
-              <h3 class="text-lg font-medium text-stone-800">
-                什么是Token？为什么需要计算Token？
-              </h3>
-              <div class="accordion-icon">
-                <div
-                  class="w-5 h-5 text-amber-600 flex items-center justify-center"
-                >
-                  <div class="up hidden">↑</div>
-                  <div class="down">↓</div>
-                </div>
-              </div>
-            </button>
-            <div class="accordion-content p-4 bg-white">
-              <div class="text-stone-700 space-y-3">
-                <p>
-                  <strong>Token</strong>
-                  是AI模型（如GPT-3.5、GPT-4等）处理文本的基本单位。在AI语言模型中，文本被分解成一系列token进行处理，而不是直接处理单词或字符。
-                </p>
-                <p>
-                  对于英文文本，一个token通常对应约4个字符，或者大约为3/4个单词。例如，单词"hamburger"可能被分解为"ham"、"bur"和"ger"三个token。而对于中文文本，通常每个汉字被视为1-2个token。
-                </p>
-                <p>
-                  <strong>为什么需要计算Token？</strong>
-                </p>
-                <ul class="list-disc pl-5 space-y-1">
-                  <li>
-                    <strong>成本计算</strong>
-                    ：大多数AI服务提供商（如OpenAI）按token数量收费。了解您的文本包含多少token可以帮助您估算API调用的成本。
-                  </li>
-                  <li>
-                    <strong>长度限制</strong
-                    >：AI模型通常有token数量限制（如GPT-4的上下文窗口为8K或32K
-                    token）。计算token数可以确保您的文本不会超出这些限制。
-                  </li>
-                  <li>
-                    <strong>性能优化</strong>
-                    ：较少的token通常意味着更快的响应时间和更低的成本。优化提示词以减少token数量是AI应用开发的重要技巧。
-                  </li>
-                </ul>
-                <p>
-                  我们的Token计数器提供了一个便捷的方式来估算您的文本将消耗多少token，帮助您优化AI交互和控制成本。
-                </p>
-              </div>
-            </div>
+				<h2 class="text-2xl font-bold text-stone-800 mb-4">Core Concept Explanation</h2>
+        <InfoAccordion expandable={false}>
+          <div>
+            <h3 class="text-lg font-medium text-stone-800 mb-1">What is a Token? Why Calculate Tokens?</h3>
+            <p>
+              A token is the basic unit of text processing in AI models like
+              GPT-3.5 and GPT-4. Rather than working with whole words or
+              characters, these models break text into smaller pieces called
+              tokens. For English text, a token typically equals about 4
+              characters or roughly 3/4 of a word. For example, "hamburger"
+              might split into "ham", "bur", and "ger"—three tokens.
+            </p>
+            <h3 class="text-lg font-medium text-stone-800 mt-4 mb-1">Why Calculate Tokens?</h3>
+            <p>Calculating tokens helps you in several key ways:</p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li>
+                <strong>Cost Estimation </strong>
+                ：Most AI providers, like OpenAI, charge based on token usage. Knowing
+                your token count lets you estimate API call costs.
+              </li>
+              <li>
+                <strong>Model Limits </strong>：AI models have token caps (e.g.,
+                GPT-4’s context window is 8K or 32K tokens). Counting tokens
+                ensures your text stays within these limits.
+              </li>
+              <li>
+                <strong>Performance Optimization </strong>
+                ：Fewer tokens mean faster responses and lower costs. Reducing token
+                count in prompts is a vital skill for AI development.
+              </li>
+            </ul>
+            <p>
+              Our Token Counter offers a quick and easy way to estimate token
+              usage and associated costs, empowering you to optimize AI
+              interactions and manage expenses effectively.
+            </p>
           </div>
-        </div>
+        </InfoAccordion>
+      </section>
 
-        <div class="accordion" data-is-open="false">
-          <div class="border border-stone-200 rounded-lg mb-4 overflow-hidden">
-            <button
-              class="accordion-header w-full p-4 text-left bg-stone-50 hover:bg-stone-100 flex justify-between items-center"
-            >
-              <h3 class="text-lg font-medium text-stone-800">
-                什么是字数统计？
-              </h3>
-              <div class="accordion-icon">
-                <div
-                  class="w-5 h-5 text-amber-600 flex items-center justify-center"
-                >
-                  <div class="up hidden">↑</div>
-                  <div class="down">↓</div>
-                </div>
-              </div>
-            </button>
-            <div class="accordion-content p-4 bg-white hidden">
-              <div class="text-stone-700 space-y-3">
-                <p>
-                  <strong>字数统计</strong
-                  >是衡量文本长度的传统方式，计算文本中包含的单词或汉字数量。
-                </p>
-                <p>
-                  对于英文和其他使用空格分隔单词的语言，字数通常是指被空格或标点符号分隔的单词数量。对于中文等不使用空格分隔的语言，字数通常是指汉字的数量。
-                </p>
-                <p>
-                  <strong>字数统计的应用场景：</strong>
-                </p>
-                <ul class="list-disc pl-5 space-y-1">
-                  <li>
-                    <strong>学术写作</strong
-                    >：论文、作业通常有最低或最高字数要求。
-                  </li>
-                  <li>
-                    <strong>内容创作</strong
-                    >：博客文章、新闻稿等需要控制适当的长度以保持读者兴趣。
-                  </li>
-                  <li>
-                    <strong>出版</strong
-                    >：书籍、杂志文章等按字数计费或规划篇幅。
-                  </li>
-                  <li>
-                    <strong>阅读时间估算</strong
-                    >：根据平均阅读速度（如每分钟200-250个单词），可以估算阅读文本所需的时间。
-                  </li>
-                </ul>
-                <p>
-                  我们的字数统计功能针对中英文混合文本进行了优化，能够准确计算各种语言的字数。
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-stone-800 mb-4">FAQ</h2>
 
-        <div class="accordion" data-is-open="false">
-          <div class="border border-stone-200 rounded-lg mb-4 overflow-hidden">
-            <button
-              class="accordion-header w-full p-4 text-left bg-stone-50 hover:bg-stone-100 flex justify-between items-center"
-            >
-              <h3 class="text-lg font-medium text-stone-800">
-                什么是字符数统计？
-              </h3>
-              <div class="accordion-icon">
-                <div
-                  class="w-5 h-5 text-amber-600 flex items-center justify-center"
-                >
-                  <div class="up hidden">↑</div>
-                  <div class="down">↓</div>
-                </div>
-              </div>
-            </button>
-            <div class="accordion-content p-4 bg-white hidden">
-              <div class="text-stone-700 space-y-3">
-                <p>
-                  <strong>字符数统计</strong
-                  >是计算文本中包含的所有字符（包括字母、数字、标点符号、空格等）的数量。
-                </p>
-                <p>我们提供两种字符计数方式：</p>
-                <ul class="list-disc pl-5 space-y-1">
-                  <li>
-                    <strong>字符数（含空格）</strong
-                    >：计算文本中的所有字符，包括空格、制表符和换行符等空白字符。
-                  </li>
-                  <li>
-                    <strong>字符数（不含空格）</strong
-                    >：只计算非空白字符，排除空格、制表符和换行符等。
-                  </li>
-                </ul>
-                <p>
-                  <strong>字符数统计的应用场景：</strong>
-                </p>
-                <ul class="list-disc pl-5 space-y-1">
-                  <li>
-                    <strong>社交媒体</strong
-                    >：Twitter（280字符）、微博（2000字符）等平台有字符限制。
-                  </li>
-                  <li>
-                    <strong>短信/SMS</strong>：传统短信通常限制在160个字符以内。
-                  </li>
-                  <li>
-                    <strong>元描述（Meta Description）</strong
-                    >：SEO优化中，建议将元描述控制在150-160个字符以内。
-                  </li>
-                  <li>
-                    <strong>数据存储</strong
-                    >：在数据库设计中，了解字符数有助于规划字段长度和存储需求。
-                  </li>
-                </ul>
-                <p>
-                  精确的字符计数对于需要严格控制文本长度的场景尤为重要，我们的工具提供实时、准确的字符统计功能。
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <InfoAccordion title="Do tokens include spaces and newline characters?">
+          <p>
+            Yes, spaces and newlines are counted in tokenization. Large language
+            models treat them as separate tokens or parts of other tokens since
+            they affect sentence structure and meaning.
+          </p>
+        </InfoAccordion>
+
+        <InfoAccordion title="Can I use this on mobile devices?">
+          <p>
+            Yes, our website is fully responsive and works seamlessly on mobile
+            phones, tablets, and desktops.
+          </p>
+        </InfoAccordion>
+
+        <InfoAccordion title="Will my input text be saved?">
+          <p>
+            No, we do not store any of your input text or personal information.
+          </p>
+        </InfoAccordion>
       </section>
 
       <Footer />

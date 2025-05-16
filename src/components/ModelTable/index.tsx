@@ -167,19 +167,19 @@ export default function ModelTable() {
 
   const modelHeaders: ModelHeader[] = [
     {
-      name: "模型",
+      name: "Models",
       key: "Model"
     },
+    // {
+    //   name: "提供商",
+    //   key: "Provider"
+    // },
     {
-      name: "提供商",
-      key: "Provider"
-    },
-    {
-      name: "上下文长度",
+      name: "Context",
       key: "Context"
     },
     {
-      name: "输入价格/百万tokens",
+      name: "Input Price/1M Tokens",
       key: "Input/1M Tokens"
     },
     // {
@@ -187,11 +187,11 @@ export default function ModelTable() {
     //   key: "Input(cached)/1M Tokens"
     // },
     {
-      name: "输出价格/百万tokens",
+      name: "Output Price/1M Tokens",
       key: "Output/1M Tokens"
     },
     {
-      name: "输入价格",
+      name: "Input Price",
       key: "Input Price"
     },
     // {
@@ -199,7 +199,7 @@ export default function ModelTable() {
     //   key: "Input(cached) Price"
     // },
     {
-      name: "输出价格",
+      name: "Output Price",
       key: "Output Price"
     }
   ];
@@ -210,7 +210,7 @@ export default function ModelTable() {
     >
       <Table>
         <TableCaption className="mb-4">
-          LLM 模型价格列表 - 当前文本 {stats.tokens.toLocaleString()} tokens
+          LLM Model Price List - Current text {stats.tokens.toLocaleString()} tokens
         </TableCaption>
         <TableHeader>
           <TableRow>

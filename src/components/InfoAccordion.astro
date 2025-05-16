@@ -1,0 +1,94 @@
+---
+interface Props {
+  title?: string;
+  isOpen?: boolean;
+  expandable?: boolean;
+  id?: string;
+}
+
+// Generate a simple ID based on title if not provided
+const { title, isOpen = false, expandable = true, id } = Astro.props;
+const accordionId =
+  id || `accordion-${(title || '').replace(/\s+/g, "-").toLowerCase()}`;
+---
+
+<div class="info-accordion" data-is-open={isOpen ? "true" : "false"}>
+  <div class="border border-stone-200 rounded-lg mb-4 overflow-hidden">
+    {
+      expandable ? (
+        <div class="accordion-container">
+          <input
+            type="checkbox"
+            id={accordionId}
+            class="accordion-checkbox"
+            checked={isOpen}
+            hidden
+          />
+          {title ? (
+            <label
+              for={accordionId}
+              class="accordion-header w-full p-4 text-left bg-stone-50 hover:bg-stone-100 flex justify-between items-center cursor-pointer"
+            >
+              <h3 class="text-lg font-medium text-stone-800">{title}</h3>
+              <div class="accordion-icon">
+                <div class="w-5 h-5 text-amber-600 flex items-center justify-center">
+                  <div class="accordion-arrow">↓</div>
+                </div>
+              </div>
+            </label>
+          ) : null}
+
+          <div class="accordion-content p-4 bg-white">
+            <div class="text-stone-700 space-y-3">
+              <slot />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          {title ? (  
+            <div class="w-full p-4 text-left bg-white flex justify-between items-center">
+              <h2 class="text-lg font-medium text-stone-800">{title}</h2>
+            </div>
+          ) : null}
+          <div class="p-4 bg-white">
+            <div class="text-stone-700 space-y-3">
+              <slot />
+            </div>
+          </div>
+        </>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  /* Hide the content by default */
+  .accordion-checkbox:not(:checked) ~ .accordion-content {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.25s ease-out;
+  }
+
+  /* Show content when checkbox is checked */
+  .accordion-checkbox:checked ~ .accordion-content {
+    max-height: 2000px; /* Large enough value to accommodate content */
+    opacity: 1;
+    transition: all 0.35s ease-in;
+  }
+
+  /* Style for the arrow indicator */
+  .accordion-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  /* When checkbox is checked, rotate arrow */
+  .accordion-checkbox:checked ~ .accordion-header .accordion-arrow {
+    transform: rotate(180deg);
+  }
+</style>

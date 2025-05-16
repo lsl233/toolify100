@@ -46,15 +46,15 @@ export default function TextInput() {
       <div className="relative bg-white rounded-lg shadow-md border border-stone-200">
         <textarea
           id="text-input"
-          placeholder="在此粘贴或输入您的文本..."
-          className="w-full min-h-[200px] p-4 text-stone-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 resize-y"
+          placeholder="Paste or enter your text here..."
+          className="w-full min-h-[200px] block py-4 pl-4 pr-12 text-stone-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 resize-y"
           value={inputText}
           onChange={handleInputChange}
         />
         <button
           id="clear-button"
-          className={`absolute top-3 right-3 p-1.5 bg-stone-100 hover:bg-stone-200 rounded-full text-stone-500 hover:text-stone-700 transition-colors ${!inputText ? 'hidden' : ''}`}
-          aria-label="清除文本"
+          className={`absolute top-4 right-4 p-1.5 bg-stone-100 hover:bg-stone-200 rounded-full text-stone-500 hover:text-stone-700 transition-colors ${!inputText ? 'hidden' : ''}`}
+          aria-label="Clear text"
           onClick={handleClear}
         >
           <div className="w-4 h-4 flex items-center justify-center">

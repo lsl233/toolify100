@@ -3,9 +3,10 @@ import '../style/global.css';
 
 interface Props {
 	title?: string;
+	description?: string;
 }
 
-const { title = "文本计数 - 在线Token计数器与文本统计工具" } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,6 +17,7 @@ const { title = "文本计数 - 在线Token计数器与文本统计工具" } = A
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<meta name="description" content={description} />
 		<slot name="head" />
 	</head>
 	<body>
