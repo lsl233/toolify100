@@ -16,9 +16,9 @@ export default function TokenCounter() {
                   <span className="text-xs">i</span>
                 </div>
               </div>
-              <div className="absolute left-0 bottom-full mb-2 w-64 p-2 bg-stone-800 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity z-10">
+              {/* <div className="absolute left-0 bottom-full mb-2 w-64 p-2 bg-stone-800 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity z-10">
                 Token是AI模型处理文本的基本单位。此计数使用tiktoken库，与OpenAI模型使用的分词方式一致。
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="flex items-baseline">

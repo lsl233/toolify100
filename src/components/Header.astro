@@ -1,5 +1,6 @@
 ---
 // Header component for token counter app
+import Logo from '../assets/logo.svg';
 ---
 
 <header>
@@ -11,15 +12,10 @@
           <a class="flex-shrink-0 flex items-center">
             <div class="h-8 w-8 mr-2 relative">
               <div class="w-full h-full text-amber-600">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"
-                    fill="currentColor"
-                  />
-                </svg>
+                <Logo />
               </div>
             </div>
-            <span class="font-bold text-xl text-stone-800">文本计数</span>
+            <span class="font-bold text-xl text-stone-800">Free Token Counter</span>
           </a>
           <div class="hidden md:ml-6 md:flex md:space-x-6">
             <!-- <a href="#" class="text-amber-600 font-medium border-b-2 border-amber-600 px-1 py-2">
@@ -36,20 +32,26 @@
             </a> -->
           </div>
         </div>
-        <div class="md:hidden">
-          <button id="mobile-menu-button" class="text-stone-600 hover:text-amber-600 focus:outline-none">
+        <!-- <div class="md:hidden">
+          <button
+            id="mobile-menu-button"
+            class="text-stone-600 hover:text-amber-600 focus:outline-none"
+          >
             <div class="w-6 h-6 flex flex-col justify-center space-y-1.5">
               <span class="block w-full h-0.5 bg-current"></span>
               <span class="block w-full h-0.5 bg-current"></span>
               <span class="block w-full h-0.5 bg-current"></span>
             </div>
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobile-menu" class="md:hidden bg-white border-b border-stone-200 shadow-sm hidden">
+    <div
+      id="mobile-menu"
+      class="md:hidden bg-white border-b border-stone-200 shadow-sm hidden"
+    >
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-amber-600 bg-amber-50">
           首页
@@ -75,4 +77,5 @@
       </div>
     </div>
   </nav>
-</header> 
+</header>
+

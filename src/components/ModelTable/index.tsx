@@ -16,6 +16,8 @@ interface ModelPricing {
 
 interface ModelPricingRates {
   Model: string;
+  Provider: string;
+  Context: string;
   inputRate: number;
   inputCachedRate: number;
   outputRate: number;
@@ -33,75 +35,131 @@ export default function ModelTable() {
   const modelPricingRates: ModelPricingRates[] = [
     {
       "Model": "o1",
+      "Provider": "OpenAI/Azure",
+      "Context": "128K",
       "inputRate": 15,
       "inputCachedRate": 7.5,
       "outputRate": 60
     },
     {
       "Model": "o1-mini",
+      "Provider": "OpenAI/Azure",
+      "Context": "128K",
       "inputRate": 3,
       "inputCachedRate": 1.5,
       "outputRate": 12
     },
     {
       "Model": "gpt-4o-mini",
+      "Provider": "OpenAI/Azure",
+      "Context": "128K",
       "inputRate": 0.15,
       "inputCachedRate": 0.075,
       "outputRate": 0.06
     },
     {
       "Model": "gpt-4o",
+      "Provider": "OpenAI/Azure",
+      "Context": "128K",
       "inputRate": 2.5,
       "inputCachedRate": 1.25,
       "outputRate": 10
     },
     {
       "Model": "Claude 3.7 Sonnet",
+      "Provider": "Anthropic",
+      "Context": "200K",
       "inputRate": 3,
       "inputCachedRate": 0,
       "outputRate": 15
     },
     {
       "Model": "Claude 3.5 Haiku",
+      "Provider": "Anthropic",
+      "Context": "200K",
       "inputRate": 0.8,
       "inputCachedRate": 0,
       "outputRate": 4
     },
     {
       "Model": "Claude 3 Opus",
+      "Provider": "Anthropic",
+      "Context": "200K",
       "inputRate": 15,
       "inputCachedRate": 0,
       "outputRate": 75
     },
     {
       "Model": "Gemini 2.0 Flash-Lite",
+      "Provider": "Google",
+      "Context": "1M",
       "inputRate": 0.075,
       "inputCachedRate": 0,
       "outputRate": 0.3
     },
     {
       "Model": "Gemini 2.0 Flash",
+      "Provider": "Google",
+      "Context": "1M",
       "inputRate": 0.1,
       "inputCachedRate": 0,
       "outputRate": 0.4
     },
     {
       "Model": "Gemini 1.5 Pro",
+      "Provider": "Google",
+      "Context": "1M",
       "inputRate": 12.5,
       "inputCachedRate": 0,
       "outputRate": 5
     },
     {
       "Model": "Gemini 1.5 Flash",
+      "Provider": "Google",
+      "Context": "1M",
       "inputRate": 0.075,
       "inputCachedRate": 0,
       "outputRate": 0.3
     },
     {
       "Model": "Gemini 1.0 Pro",
+      "Provider": "Google",
+      "Context": "32K",
       "inputRate": 0.5,
       "inputCachedRate": 0,
       "outputRate": 1.5
+    },
+    {
+      "Model": "Deepseek chat STANDARD",
+      "Provider": "Deepseek",
+      "Context": "64K",
+      "inputRate": 0.27,
+      "inputCachedRate": 0.07,
+      "outputRate": 1.10
+    },
+    {
+      "Model": "Deepseek chat DISCOUNT",
+      "Provider": "Deepseek",
+      "Context": "64K",
+      "inputRate": 0.135,
+      "inputCachedRate": 0.035,
+      "outputRate": 0.550
+    },
+    {
+      "Model": "Deepseek reasoner STANDARD",
+      "Provider": "Deepseek",
+      "Context": "64K",
+      "inputRate": 0.55,
+      "inputCachedRate": 0.14,
+      "outputRate": 2.19
+    },
+    {
+      "Model": "Deepseek reasoner DISCOUNT",
+      "Provider": "Deepseek",
+      "Context": "64K",
+      "inputRate": 0.135,
+      "inputCachedRate": 0.035,
+      "outputRate": 0.550
     }
   ];
 
@@ -116,8 +174,8 @@ export default function ModelTable() {
       
       return {
         Model: model.Model,
-        Provider: getProviderForModel(model.Model),
-        Context: getContextForModel(model.Model),
+        Provider: model.Provider,
+        Context: model.Context,
         "Input/1M Tokens": `$${model.inputRate}`,
         "Input(cached)/1M Tokens": `$${model.inputCachedRate}`,
         "Output/1M Tokens": `$${model.outputRate}`,
@@ -134,32 +192,6 @@ export default function ModelTable() {
       return "$0.0001"; // Minimum displayable price
     }
     return `$${price.toFixed(4)}`;
-  };
-
-  // Helper function to get provider for a model
-  const getProviderForModel = (model: string): string => {
-    if (model.startsWith("gpt-") || model.startsWith("o1")) {
-      return "OpenAI/Azure";
-    } else if (model.startsWith("Claude")) {
-      return "Anthropic";
-    } else if (model.startsWith("Gemini")) {
-      return "Google";
-    }
-    return "Unknown";
-  };
-
-  // Helper function to get context window size for a model
-  const getContextForModel = (model: string): string => {
-    if (model.startsWith("gpt-") || model.startsWith("o1")) {
-      return "128K";
-    } else if (model.startsWith("Claude")) {
-      return "200K";
-    } else if (model.startsWith("Gemini 1.0")) {
-      return "32K";
-    } else if (model.startsWith("Gemini")) {
-      return "1M";
-    }
-    return "Unknown";
   };
   
   // Generate pricing data
