@@ -10,16 +10,8 @@ export default function TokenCalculator() {
   const stats = useStore(textStats);
   const [tokenInput, setTokenInput] = useState<string>("");
 
-  // Sync the input field with the token count from the store
-  useEffect(() => {
-    if (stats.tokens !== undefined) {
-      setTokenInput(String(stats.tokens));
-    }
-  }, [stats.tokens]);
-
   const handleDirectTokenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setTokenInput(value);
     
     // Update the token count in the store
     if (value && !isNaN(Number(value))) {

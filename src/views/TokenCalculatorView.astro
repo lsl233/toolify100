@@ -6,6 +6,7 @@ import ModelTable from "../components/ModelTable/index.tsx";
 import InfoAccordion from "../components/InfoAccordion.astro";
 import TextInput from "@/components/TokenCalculator/TextInput";
 import Statistics from "@/components/TokenCalculator/Statistics";
+import TokenCalculator from "@/components/TokenCalculator/index.tsx";
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
@@ -27,8 +28,7 @@ import Statistics from "@/components/TokenCalculator/Statistics";
       </p>
     </div>
     <div class="container mx-auto px-4">
-      <TextInput client:load/>
-      <Statistics client:load/>
+      <TokenCalculator client:load/>
       <section class="mb-12">
         <!-- <h2 class="text-2xl font-bold text-stone-800 mb-4">Model Price</h2> -->
         <ModelTable client:load />
