@@ -3,6 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import ModelTable from "@/components/ModelTable/index.tsx";
 import TokenCounter from "@/components/TokenCounter/index.tsx";
+import Footer from "@/components/Footer.astro";
 ---
 
 <BaseLayout
@@ -30,5 +31,7 @@ import TokenCounter from "@/components/TokenCounter/index.tsx";
         <ModelTable client:load />
       </section>
     </div>
+
+    <Footer />
   </div>
 </BaseLayout>
