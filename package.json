@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/react": "^4.2.7",
     "@nanostores/react": "^1.0.0",
+    "@radix-ui/react-tabs": "^1.1.11",
     "@tailwindcss/vite": "^4.1.6",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",

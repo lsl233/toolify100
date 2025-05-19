@@ -1,6 +1,7 @@
 import { Table, TableCaption, TableRow, TableHead, TableHeader, TableBody, TableCell } from "../ui/table";
 import { useStore } from "@nanostores/react";
 import { textStats } from "../../store/tokenStore";
+import { cn } from "@/lib/utils";
 
 interface ModelPricing {
   Model: string;
@@ -165,7 +166,7 @@ export default function ModelTable() {
 
   // Calculate model pricing based on token count
   const calculatePricing = (): ModelPricing[] => {
-    const tokensInMillion = stats.tokens / 1000000;
+    const tokensInMillion = stats.tokens ? stats.tokens / 1000000 : 0;
     
     return modelPricingRates.map(model => {
       const inputPrice = model.inputRate * tokensInMillion;
@@ -242,10 +243,10 @@ export default function ModelTable() {
     >
       <Table>
         <TableCaption className="mb-4">
-          LLM Model Price List - Current text {stats.tokens.toLocaleString()} tokens
+          LLM Model Price List - Current {stats.tokens?.toLocaleString()} tokens
         </TableCaption>
         <TableHeader>
-          <TableRow>
+          <TableRow className="border-stone-200">
             {
               modelHeaders.map((header) => (
                 <TableHead className="font-medium px-4 py-1" key={header.key as React.Key}>{header.name}</TableHead>
@@ -255,7 +256,7 @@ export default function ModelTable() {
         </TableHeader>
         <TableBody>
           {pricingData.map((model, index) => (
-            <TableRow key={index} className={index % 2 === 0 ? "bg-stone-50" : ""}>
+            <TableRow key={index} className={cn(index % 2 === 0 ? "bg-stone-50" : "", "border-stone-200")}>
               {
                 modelHeaders.map((header) => (
                   <TableCell className="px-4 py-2" key={header.key as React.Key}>{model[header.key]}</TableCell>

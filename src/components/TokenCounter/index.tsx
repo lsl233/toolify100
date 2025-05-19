@@ -1,70 +1,64 @@
+import { Tabs, TabsContent, TabsTrigger, TabsList } from "@/components/ui/tabs";
+import Statistics from "./Statistics";
+import TextInput from "./TextInput";
+import { Input } from "../ui/input";
+import { useState } from "react";
 import { useStore } from "@nanostores/react";
-import { textStats } from "../../store/tokenStore";
+import { resetTokens, textStats, updateText, updateTokenCount } from "../../store/tokenStore";
 
 export default function TokenCounter() {
+  // const [directTokenInput, setDirectTokenInput] = useState<string>("");
   const stats = useStore(textStats);
 
+  const handleDirectTokenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // setDirectTokenInput(value);
+    
+    // Update the token count in the store
+    if (value && !isNaN(Number(value))) {
+      // Create a dummy text with the specified number of tokens
+      // This is a workaround since we can't directly set the token count
+      updateTokenCount(Number(value));
+    }
+  };
+
+  const handleTabChange = (value: string) => {
+    resetTokens();
+  };
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      <div className="bg-white rounded-lg shadow-md border border-stone-200 p-4 hover:shadow-lg transition-shadow">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <span className="text-stone-700 font-medium">Tokens</span>
-            <div className="relative ml-1 group">
-              <div className="w-4 h-4 text-amber-500 cursor-help">
-                <div className="w-4 h-4 rounded-full border border-amber-500 flex items-center justify-center">
-                  <span className="text-xs">i</span>
-                </div>
-              </div>
-              {/* <div className="absolute left-0 bottom-full mb-2 w-64 p-2 bg-stone-800 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity z-10">
-                Token是AI模型处理文本的基本单位。此计数使用tiktoken库，与OpenAI模型使用的分词方式一致。
-              </div> */}
+    <>
+      <Tabs onValueChange={handleTabChange} defaultValue="text">
+        <TabsList>
+          <TabsTrigger value="text">Input Text</TabsTrigger>
+          <TabsTrigger value="token">Input Token Count</TabsTrigger>
+        </TabsList>
+        <TabsContent value="text">
+          <TextInput />
+          <Statistics />
+        </TabsContent>
+        <TabsContent value="token">
+          <div className="space-y-4 mb-4">
+            <div className="flex items-center">
+              {/* <label htmlFor="token-input" className="block text-sm font-medium text-stone-700 mb-1">
+                Enter token count directly
+              </label> */}
+              <Input 
+                id="token-input"
+                type="number" 
+                className="focus:ring-amber-500 w-1/2 bg-white" 
+                placeholder="Enter token count (e.g., 1000)" 
+                value={stats.tokens}
+                onChange={handleDirectTokenInput}
+              />
+              <p className="text-sm ml-2 text-stone-500">
+                This will calculate prices based on the token count you enter
+              </p>
             </div>
+            {/* <Statistics /> */}
           </div>
-          <div className="flex items-baseline">
-            <span id="token-count" className="text-2xl font-bold text-amber-600">
-              {stats.tokens}
-            </span>
-            {/* <span className="ml-1 text-xs text-stone-500">tokens</span> */}
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-lg shadow-md border border-stone-200 p-4 hover:shadow-lg transition-shadow">
-        <div className="flex justify-between items-center">
-          <span className="text-stone-700 font-medium">Words</span>
-          <div className="flex items-baseline">
-            <span id="word-count" className="text-2xl font-bold text-amber-600">
-              {stats.words}
-            </span>
-            {/* <span className="ml-1 text-xs text-stone-500">字</span> */}
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-lg shadow-md border border-stone-200 p-4 hover:shadow-lg transition-shadow">
-        <div className="flex justify-between items-center">
-          <span className="text-stone-700 font-medium">Characters (no spaces)</span>
-          <div className="flex items-baseline">
-            <span id="chars-with-spaces" className="text-2xl font-bold text-amber-600">
-              {stats.charsWithSpaces}
-            </span>
-            {/* <span className="ml-1 text-xs text-stone-500">字符</span> */}
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-lg shadow-md border border-stone-200 p-4 hover:shadow-lg transition-shadow">
-        <div className="flex justify-between items-center">
-          <span className="text-stone-700 font-medium">Total characters</span>
-          <div className="flex items-baseline">
-            <span id="chars-without-spaces" className="text-2xl font-bold text-amber-600">
-              {stats.charsWithoutSpaces}
-            </span>
-            {/* <span className="ml-1 text-xs text-stone-500">字符</span> */}
-          </div>
-        </div>
-      </div>
-    </div>
+        </TabsContent>
+      </Tabs>
+    </>
   );
-} 
+}
