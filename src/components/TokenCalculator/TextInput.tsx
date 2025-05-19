@@ -1,10 +1,8 @@
 import { useStore } from "@nanostores/react";
 import { text, updateText } from "../../store/tokenStore";
-import { useEffect, useState } from "react";
 
 export default function TextInput() {
   const textValue = useStore(text);
-  // const [inputText, setInputText] = useState($text);
   
   // Update the store when input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -18,28 +16,6 @@ export default function TextInput() {
     // setInputText("");
     updateText("");
   };
-
-  // Update local state if store changes externally
-  // useEffect(() => {
-  //   setInputText($text);
-  // }, [$text]);
-
-  // Handle template selection from the document
-  // useEffect(() => {
-  //   const handleTemplateSelected = (e: any) => {
-  //     const content = e.detail?.content;
-  //     if (content) {
-  //       // setInputText(content);
-  //       updateText(content);
-  //     }
-  //   };
-
-  //   document.addEventListener('template-selected', handleTemplateSelected);
-    
-  //   return () => {
-  //     document.removeEventListener('template-selected', handleTemplateSelected);
-  //   };
-  // }, []);
 
   return (
     <div className="mb-4">

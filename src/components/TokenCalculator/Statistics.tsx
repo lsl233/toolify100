@@ -1,7 +1,7 @@
 import { useStore } from "@nanostores/react";
 import { textStats } from "../../store/tokenStore";
 
-export default function TokenCounter() {
+export default function Statistics() {
   const stats = useStore(textStats);
 
   return (

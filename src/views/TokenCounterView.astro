@@ -1,23 +1,19 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import ModelTable from "../components/ModelTable/index.tsx";
-import TokenCounter from "../components/TokenCounter/index.tsx";
-import InfoAccordion from "../components/InfoAccordion.astro";
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import ModelTable from "@/components/ModelTable/index.tsx";
+import TokenCounter from "@/components/TokenCounter/index.tsx";
 ---
 
 <BaseLayout
-  title="Free Token Counter | Calculate AI Tokens Instantly"
+  title="Free Token Calculate | Calculate AI Tokens Instantly"
   description="Calculate tokens for GPT, Claude, Llama, Deepseek, and more with our free AI token counter. No signup needed, instant results, and clear pricing tables for easy cost comparison."
 >
   <div class="min-h-screen bg-stone-30 bg-muted">
     <Header />
     <div class="mb-8 text-center pt-8">
       <h1 class="text-3xl font-bold text-stone-800 mb-2">
-        Free Token Counter & Pricing Calculator
+        Free Token Calculate & Pricing Calculator
       </h1>
       <p class="text-stone-600">
         Instantly calculate token count and pricing for your text in AI models
@@ -26,129 +22,13 @@ import InfoAccordion from "../components/InfoAccordion.astro";
       </p>
     </div>
     <div class="container mx-auto px-4">
-      <TokenCounter client:load />
+      <div class="mb-4">
+        <TokenCounter client:load/>
+      </div>
       <section class="mb-12">
         <!-- <h2 class="text-2xl font-bold text-stone-800 mb-4">Model Price</h2> -->
         <ModelTable client:load />
       </section>
-
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold text-stone-800 mb-4">
-          Key Features of Our Token Counter
-        </h2>
-        <InfoAccordion expandable={false}>
-          <ol class="list-decimal pl-5 space-y-1">
-            <li>
-              Clear Pricing Tables for Each AI Model，View token prices for
-              different models in an easy-to-read format.
-            </li>
-            <li>
-              Real-Time Token Calculation, Get instant token counts as you input
-              your text. and price.
-            </li>
-            <li>
-              No Registration Required, Completely Free, Use the tool without
-              any account or payment.
-            </li>
-          </ol>
-        </InfoAccordion>
-      </section>
-
-      <!-- 核心概念解释模块 -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold text-stone-800 mb-4">
-          Core Concept Explanation
-        </h2>
-        <InfoAccordion expandable={false}>
-          <div>
-            <h3 class="text-lg font-medium text-stone-800 mb-1">
-              What is a Token? Why Calculate Tokens?
-            </h3>
-            <p>
-              A token is the basic unit of text processing in AI models like
-              GPT-3.5 and GPT-4. Rather than working with whole words or
-              characters, these models break text into smaller pieces called
-              tokens. For English text, a token typically equals about 4
-              characters or roughly 3/4 of a word. For example, "hamburger"
-              might split into "ham", "bur", and "ger"—three tokens.
-            </p>
-            <h3 class="text-lg font-medium text-stone-800 mt-4 mb-1">
-              Why Calculate Tokens?
-            </h3>
-            <p>Calculating tokens helps you in several key ways:</p>
-            <ul class="list-disc pl-5 space-y-1 my-1">
-              <li>
-                <strong>Cost Estimation </strong>
-                ：Most AI providers, like OpenAI, charge based on token usage. Knowing
-                your token count lets you estimate API call costs.
-              </li>
-              <li>
-                <strong>Model Limits </strong>：AI models have token caps (e.g.,
-                GPT-4’s context window is 8K or 32K tokens). Counting tokens
-                ensures your text stays within these limits.
-              </li>
-              <li>
-                <strong>Performance Optimization </strong>
-                ：Fewer tokens mean faster responses and lower costs. Reducing token
-                count in prompts is a vital skill for AI development.
-              </li>
-            </ul>
-            <p>
-              Our Token Counter offers a quick and easy way to estimate token
-              usage and associated costs, empowering you to optimize AI
-              interactions and manage expenses effectively.
-            </p>
-          </div>
-        </InfoAccordion>
-      </section>
-
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold text-stone-800 mb-4">FAQ</h2>
-
-        <InfoAccordion title="Do tokens include spaces and newline characters?">
-          <p>
-            Yes, spaces and newlines are counted in tokenization. Large language
-            models treat them as separate tokens or parts of other tokens since
-            they affect sentence structure and meaning.
-          </p>
-        </InfoAccordion>
-
-        <InfoAccordion title="Can I use this on mobile devices?">
-          <p>
-            Yes, our website is fully responsive and works seamlessly on mobile
-            phones, tablets, and desktops.
-          </p>
-        </InfoAccordion>
-
-        <InfoAccordion title="Will my input text be saved?">
-          <p>
-            No, we do not store any of your input text or personal information.
-          </p>
-        </InfoAccordion>
-      </section>
-
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold text-stone-800 mb-4">
-          Token Counter Update Log
-        </h2>
-        <InfoAccordion expandable={false}>
-          <ul class="list-disc pl-5 space-y-1 my-1">
-            <li>
-              <time class="text-sm text-muted-foreground" datetime="2025-05-19"
-                >2025-05-19</time
-              >
-              <p>Add a new feature: Input token count directly.</p>
-            </li>
-            <li>
-              <time class="text-sm text-muted-foreground" datetime="2025-05-17"
-                >2025-05-17</time
-              >
-              <p>Initial release.</p>
-            </li>
-          </ul>
-        </InfoAccordion>
-      </section>
-      <Footer />
     </div>
   </div>
 </BaseLayout>
