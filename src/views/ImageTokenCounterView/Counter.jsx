@@ -3,8 +3,9 @@ import { ImageUpload } from "@/components/ui/image-upload";
 import { calculateImageTokensFromFile } from "@/lib/imageTokenCalculator";
 import { getImageInfo } from "@/lib/imageUtils";
 import { useState } from "react";
-import { $tokenCount, updateTokenCount } from "./store";
+import { $tokenCount, updateTokenCount, resetTokenCount } from "./store";
 import { useStore } from '@nanostores/react'
+
 
 
 export default function TokenCalculator() {
@@ -50,11 +51,11 @@ export default function TokenCalculator() {
           width: 0,
           height: 0
         });
-        setTokens(0);
+        resetTokenCount(0);
       }
     } else {
       // 重置状态
-      setTokens(0);
+      resetTokenCount(0);
       setImageInfo({
         size: 0,
         width: 0,
