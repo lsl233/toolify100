@@ -1,29 +1,29 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
-import ModelTable from "@/components/ModelTable/index.tsx";
-import TokenCounter from "@/components/TokenCounter/index.tsx";
+import ModelTable from "./ModelTable.tsx";
 import Footer from "@/components/Footer.astro";
+import Counter from "./Counter.jsx";
+
 ---
 
 <BaseLayout
   title="Free Token Counter | Calculate AI Tokens Instantly"
   description="Use our free token counter to calculate tokens for GPT, Claude, Llama & more. Instant results, no signup, with clear pricing for AI models."
 >
-  <div class="min-h-screen bg-stone-30 bg-muted">
+  <div class="min-h-screen">
     <Header />
     <div class="mb-8 text-center pt-8">
       <h1 class="text-3xl font-bold text-stone-800 mb-2">
-        Free Token Counter for AI Models
+        Free Image Token Calculator
       </h1>
       <p class="text-stone-600">
-        Instantly Calculate Tokens for GPT, Claude, Llama & More – No Signup
-        Needed
+        Instantly Calculate Tokens for Image – No Signup Needed
       </p>
     </div>
     <div class="container mx-auto px-4">
       <div class="mb-4">
-        <TokenCounter client:load />
+        <Counter client:load />
       </div>
       <section class="mb-12">
         <!-- <h2 class="text-2xl font-bold text-stone-800 mb-4">Model Price</h2> -->
