@@ -63,17 +63,6 @@ export default function TokenCalculator() {
       });
     }
   };
-  
-  // 格式化文件大小为友好显示
-  const formatFileSize = (bytes) => {
-    if (bytes === 0) return '0 Bytes';
-    
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
 
   return (
     <div className="">
@@ -86,7 +75,6 @@ export default function TokenCalculator() {
           <ImageUpload
             onImageChange={handleImageChange}
             maxSizeMB={10}
-            label="请上传图片"
           />
         </TabsContent>
         <TabsContent value="size">

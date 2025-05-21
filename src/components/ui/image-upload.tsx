@@ -17,7 +17,7 @@ export function ImageUpload({
   maxSizeMB = 5,
   acceptedFileTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
   className = '',
-  label = '拖拽或点击上传图片',
+  label = 'Drag and drop or click to upload image',
   previewWidth = 300,
   previewHeight = 300,
   minHeight = 200
@@ -39,13 +39,13 @@ export function ImageUpload({
     
     // 验证文件类型
     if (!acceptedFileTypes.includes(file.type)) {
-      setError(`不支持的文件类型。请上传 ${acceptedFileTypes.map(type => type.replace('image/', '.')).join(', ')} 格式的图片`);
+      setError(`Unsupported file type. Please upload an image in the following formats: ${acceptedFileTypes.map(type => type.replace('image/', '.')).join(', ')}`);
       return;
     }
     
     // 验证文件大小
     if (file.size > maxSizeMB * 1024 * 1024) {
-      setError(`文件大小超过限制 (${maxSizeMB}MB)`);
+      setError(`File size exceeds the limit (${maxSizeMB}MB)`);
       return;
     }
     
@@ -64,7 +64,7 @@ export function ImageUpload({
     };
     
     img.onerror = () => {
-      setError('图片加载失败');
+      setError('Failed to load image');
       setIsLoading(false);
       URL.revokeObjectURL(previewUrl);
     };
@@ -144,20 +144,20 @@ export function ImageUpload({
           {isLoading ? (
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 border-4 border-stone-200 border-t-amber-500 rounded-full animate-spin mb-2"></div>
-              <p className="text-stone-600">正在加载图片...</p>
+              <p className="text-stone-600">Loading image...</p>
             </div>
           ) : imagePreview ? (
             <div className="relative">
               <img
                 src={imagePreview}
-                alt="预览图"
+                alt="Preview image"
                 className="mx-auto object-contain rounded"
                 style={{ maxWidth: `${previewWidth}px`, maxHeight: `${previewHeight}px` }}
               />
               <button
                 className="absolute top-2 right-2 bg-stone-800 bg-opacity-70 text-white rounded-full p-1 hover:bg-stone-900 transition-colors"
                 onClick={removeImage}
-                aria-label="移除图片"
+                aria-label="Remove image"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -173,10 +173,10 @@ export function ImageUpload({
               </div>
               <p className="text-stone-600 font-medium">{label}</p>
               <p className="text-stone-500 text-sm mt-1">
-                支持格式: {acceptedFileTypes.map(type => type.replace('image/', '.')).join(', ')}
+                Supported formats: {acceptedFileTypes.map(type => type.replace('image/', '.')).join(', ')}
               </p>
               <p className="text-stone-500 text-sm">
-                最大文件大小: {maxSizeMB}MB
+                Maximum file size: {maxSizeMB}MB
               </p>
             </div>
           )}

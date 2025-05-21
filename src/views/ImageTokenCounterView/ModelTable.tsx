@@ -27,7 +27,30 @@ const aiModels: AIModel[] = [
     inputPrice: 0,
     inputCachedPrice: 0,
     outputPrice: 0,
-  }
+  },
+  {
+    model: "GPT-4.1 mini",
+    provider: "OpenAI",
+    context: "text",
+    inputPriceRate: 0.4,
+    inputCachedPriceRate: 0.1,
+    outputPriceRate: 1.6,
+    inputPrice: 0,
+    inputCachedPrice: 0,
+    outputPrice: 0,
+  },
+  {
+    model: "GPT-4.1 nano",
+    provider: "OpenAI",
+    context: "text",
+    inputPriceRate: 0.1,
+    inputCachedPriceRate: 0.025,
+    outputPriceRate: 0.4,
+    inputPrice: 0,
+    inputCachedPrice: 0,
+    outputPrice: 0,
+  },
+  
 ]
 
 const modelHeaders: {
