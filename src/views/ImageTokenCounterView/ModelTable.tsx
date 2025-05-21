@@ -50,7 +50,28 @@ const aiModels: AIModel[] = [
     inputCachedPrice: 0,
     outputPrice: 0,
   },
-  
+  {
+    model: "OpenAI o3",
+    provider: "OpenAI",
+    context: "text",
+    inputPriceRate: 10,
+    inputCachedPriceRate: 2.5,
+    outputPriceRate: 40,
+    inputPrice: 0,
+    inputCachedPrice: 0,
+    outputPrice: 0,
+  },
+  {
+    model: "OpenAI o4-mini",
+    provider: "OpenAI",
+    context: "text",
+    inputPriceRate: 1.1,
+    inputCachedPriceRate: 0.275,
+    outputPriceRate: 4.4,
+    inputPrice: 0,
+    inputCachedPrice: 0,
+    outputPrice: 0,
+  },
 ]
 
 const modelHeaders: {
