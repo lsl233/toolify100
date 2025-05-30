@@ -5,9 +5,11 @@ import { getImageInfo } from "@/lib/imageUtils";
 import { useState } from "react";
 import { $tokenCount, updateTokenCount, resetTokenCount, updateImageTokens, $aiModels } from "./store";
 import { useStore } from '@nanostores/react'
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator"
+import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from "@/components/ui/select";
 
 export default function TokenCalculator() {
-  // const [tokens, setTokens] = useState(0);
   const tokenCount = useStore($tokenCount);
   const models = useStore($aiModels);
   const [imageInfo, setImageInfo] = useState({
@@ -16,14 +18,85 @@ export default function TokenCalculator() {
     height: 0
   });
 
-  const handleTabChange = () => {
-    console.log("handleTabChange");
+  // 新增状态管理
+  const [imageSize, setImageSize] = useState("");
+  const [sizeUnit, setSizeUnit] = useState("mb");
+  const [imageCount, setImageCount] = useState("");
+
+  const handleTabChange = (value) => {
+    if (value === "upload") {
+      // 重置所有状态
+      resetTokenCount();
+      updateImageTokens({});
+      setImageInfo({
+        size: 0,
+        width: 0,
+        height: 0
+      });
+    } else if (value === "size") {
+      // 重置所有状态
+      resetTokenCount();
+      updateImageTokens({size: 0});
+      setImageSize("");
+      setImageCount("");
+      setSizeUnit("mb");
+    }
   }
+
+  const calculateTokensFromSize = (size, count, unit) => {
+    if (!size || !count) return;
+
+    const inputSize = parseFloat(size);
+    const countInInt = parseInt(count);
+
+    if (isNaN(inputSize) || isNaN(countInInt) || inputSize <= 0 || countInInt <= 0) return;
+
+    // 转换为字节
+    let sizeInBytes = inputSize;
+    switch (unit) {
+      case "kb":
+        sizeInBytes *= 1024;
+        break;
+      case "mb":
+        sizeInBytes *= 1024 * 1024;
+        break;
+      case "gb":
+        sizeInBytes *= 1024 * 1024 * 1024;
+        break;
+    }
+
+    // 获取所有支持图片的模型
+    const visionModels = models
+      .filter(model => model.visionModel)
+      .map(model => model.visionModel);
+
+    // 为每个支持图片的模型计算token
+    const modelTokens = {};
+    visionModels.forEach((modelType) => {
+      if (modelType) {
+        // 基于图片大小估算token
+        // 这里使用一个简单的估算公式：每1MB大约4000个token
+        const tokensPerImage = Math.ceil((sizeInBytes / (1024 * 1024)) * 4000);
+        modelTokens[modelType] = tokensPerImage * countInInt;
+      }
+    });
+
+    // 更新每个模型的图片token
+    updateImageTokens(modelTokens);
+    updateTokenCount(0); // 重置文本token，因为是图片模式
+
+    // 更新图片信息显示
+    setImageInfo({
+      size: `${inputSize} ${unit.toUpperCase()}`,
+      width: 0,
+      height: 0
+    });
+  };
 
   const handleImageChange = async (file) => {
     if (file) {
       console.log('Selected file:', file.name, file.size);
-      
+
       try {
         // 重置当前信息
         setImageInfo({
@@ -31,7 +104,7 @@ export default function TokenCalculator() {
           width: 0,
           height: 0
         });
-        
+
         // 获取图片信息
         const info = await getImageInfo(file);
         setImageInfo({
@@ -39,7 +112,7 @@ export default function TokenCalculator() {
           width: info.width,
           height: info.height
         });
-        
+
         // 获取所有支持图片的模型
         const visionModels = models
           .filter(model => model.visionModel)
@@ -92,7 +165,7 @@ export default function TokenCalculator() {
       <Tabs className="flex-1" onValueChange={handleTabChange} defaultValue="upload">
         <TabsList>
           <TabsTrigger value="upload">Upload Image</TabsTrigger>
-          <TabsTrigger disabled value="size">Input Image Size</TabsTrigger>
+          <TabsTrigger value="size">Input Image Size</TabsTrigger>
         </TabsList>
         <TabsContent value="upload">
           <ImageUpload
@@ -101,6 +174,44 @@ export default function TokenCalculator() {
           />
         </TabsContent>
         <TabsContent value="size">
+          <div className="flex items-center space-x-2">
+            <Input
+              type="number"
+              className="focus:ring-amber-500 w-1/3 bg-white"
+              placeholder="Enter image size (e.g., 1000)"
+              value={imageSize}
+              onChange={(e) => {
+                const newSize = e.target.value;
+                setImageSize(newSize);
+                calculateTokensFromSize(newSize, imageCount, sizeUnit);
+              }}
+            />
+            <Select value={sizeUnit} onValueChange={(value) => {
+              setSizeUnit(value);
+              calculateTokensFromSize(imageSize, imageCount, value);
+            }}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select image size unit" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="kb">KB</SelectItem>
+                <SelectItem value="mb">MB</SelectItem>
+                <SelectItem value="gb">GB</SelectItem>
+              </SelectContent>
+            </Select>
+            <Separator orientation="vertical" className="!h-6" />
+            <Input
+              type="number"
+              className="w-[180px] focus:ring-amber-500 bg-white"
+              placeholder="Enter image count (e.g., 50)"
+              value={imageCount}
+              onChange={(e) => {
+                const newCount = e.target.value;
+                setImageCount(newCount);
+                calculateTokensFromSize(imageSize, newCount, sizeUnit);
+              }}
+            />
+          </div>
         </TabsContent>
       </Tabs>
       <div className="flex gap-4">

@@ -239,6 +239,8 @@ export const updateImageTokens = (modelTokens: Record<SupportedModel, number>) =
     imageTokens: model.visionModel ? modelTokens[model.visionModel] : 0
   }));
 
+  console.log('updatedModels', updatedModels)
+
   $aiModels.set(updatedModels);
   updateModelPrices(); // 更新图片token后重新计算价格
 };
@@ -248,7 +250,7 @@ const updateModelPrices = () => {
   // const tokenCount = $tokenCount.get();
   const models = $aiModels.get();
   const updatedModels = models.map(model => {
-    const tokenCount = model.imageTokens
+    const tokenCount = model.imageTokens || 0
     // 计算文本token的价格
     const textInputPrice = model.inputPriceRate * tokenCount / 1000000;
     const textInputCachedPrice = model.inputCachedPriceRate * tokenCount / 1000000;
@@ -258,7 +260,7 @@ const updateModelPrices = () => {
     const imagePrice = model.imageTokens && model.imagePriceRate
       ? (model.imageTokens * model.imagePriceRate / 1000000)
       : 0;
-
+    console.log('textInputPrice + imagePrice', textInputPrice + imagePrice)
     return {
       ...model,
       // 总价格 = 文本价格 + 图片价格
