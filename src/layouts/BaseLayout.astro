@@ -21,11 +21,7 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <slot name="head" />
   </head>
-  <body class="bg-stone-10">
-    <slot />
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QEFFB0CZJ6"
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QEFFB0CZJ6"
     ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -36,5 +32,10 @@ const { title, description } = Astro.props;
 
       gtag("config", "G-QEFFB0CZJ6");
     </script>
+  <body class="bg-stone-10">
+    <slot />
+
+    <!-- Google tag (gtag.js) -->
+    
   </body>
 </html>
