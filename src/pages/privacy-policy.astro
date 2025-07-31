@@ -1,0 +1,119 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Privacy Policy | Free Token Counter & Pricing Calculator"
+  description="Privacy Policy for Free Token Counter & Pricing Calculator. Learn how we protect your data and privacy when using our AI token counting tool."
+>
+  <div class="min-h-screen">
+    <Header />
+    <div class="container mx-auto px-4 py-8">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-stone-800 mb-6">Privacy Policy</h1>
+        
+        <div class="prose prose-stone max-w-none">
+          <p class="text-stone-600 mb-6">
+            <strong>Last updated:</strong> {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </p>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">1. Introduction</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              Welcome to Free Token Counter & Pricing Calculator ("we," "our," or "us"). We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your information when you use our token counting and pricing calculator service.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">2. Information We Collect</h2>
+            <h3 class="text-xl font-medium text-stone-800 mb-3">2.1 Information You Provide</h3>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              Our service is designed to be privacy-first. We do not require registration or account creation. The text you input for token counting is processed locally in your browser and is not stored on our servers.
+            </p>
+            
+            <h3 class="text-xl font-medium text-stone-800 mb-3">2.2 Automatically Collected Information</h3>
+            <ul class="list-disc pl-6 text-stone-700 space-y-2 mb-4">
+              <li>Usage analytics through Google Analytics to understand how our service is used</li>
+              <li>Technical information such as browser type, device type, and IP address</li>
+              <li>Performance data to improve our service quality</li>
+            </ul>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">3. How We Use Your Information</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">We use the collected information to:</p>
+            <ul class="list-disc pl-6 text-stone-700 space-y-2 mb-4">
+              <li>Provide and maintain our token counting service</li>
+              <li>Analyze usage patterns to improve our service</li>
+              <li>Monitor and analyze trends and usage</li>
+              <li>Ensure the security and proper functioning of our service</li>
+            </ul>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">4. Data Storage and Security</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              <strong>Your Input Text:</strong> All text you input for token counting is processed entirely in your browser using client-side JavaScript. We do not transmit, store, or have access to your input text on our servers.
+            </p>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              <strong>Analytics Data:</strong> We use industry-standard security measures to protect any analytics data we collect. This data is anonymized and used solely for improving our service.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">5. Third-Party Services</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">We use the following third-party services:</p>
+            <ul class="list-disc pl-6 text-stone-700 space-y-2 mb-4">
+              <li><strong>Google Analytics:</strong> For website analytics and usage statistics</li>
+              <li><strong>Microsoft Clarity:</strong> For user behavior analytics to improve user experience</li>
+            </ul>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              These services have their own privacy policies, and we encourage you to review them.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">6. Cookies and Tracking</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              We use cookies and similar tracking technologies to enhance your experience and collect analytics data. You can control cookie settings through your browser preferences.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">7. Your Rights</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">You have the right to:</p>
+            <ul class="list-disc pl-6 text-stone-700 space-y-2 mb-4">
+              <li>Access information about how your data is processed</li>
+              <li>Request deletion of any personal data we may have</li>
+              <li>Opt-out of analytics tracking by using browser settings or ad blockers</li>
+              <li>Contact us with any privacy-related questions or concerns</li>
+            </ul>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">8. Changes to This Privacy Policy</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">9. Contact Us</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              If you have any questions about this Privacy Policy or our privacy practices, please contact us at:
+            </p>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              <strong>Email:</strong> <a href="mailto:info@toolify100.com" class="text-blue-600 hover:text-blue-800 underline">info@toolify100.com</a>
+            </p>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              You can also reach us through our website or other contact information provided on our main page.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </div>
+</BaseLayout>

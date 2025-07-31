@@ -1,0 +1,156 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Terms of Service | Free Token Counter & Pricing Calculator"
+  description="Terms of Service for Free Token Counter & Pricing Calculator. Read our terms and conditions for using our AI token counting and pricing tool."
+>
+  <div class="min-h-screen">
+    <Header />
+    <div class="container mx-auto px-4 py-8">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-stone-800 mb-6">Terms of Service</h1>
+        
+        <div class="prose prose-stone max-w-none">
+          <p class="text-stone-600 mb-6">
+            <strong>Last updated:</strong> {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </p>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">1. Acceptance of Terms</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              By accessing and using Free Token Counter & Pricing Calculator ("the Service"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">2. Description of Service</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              Free Token Counter & Pricing Calculator is a web-based tool that provides:
+            </p>
+            <ul class="list-disc pl-6 text-stone-700 space-y-2 mb-4">
+              <li>Real-time token counting for various AI models including GPT, Claude, Llama, and Deepseek</li>
+              <li>Pricing calculations based on current AI model pricing</li>
+              <li>Comparison tables for different AI models and their costs</li>
+              <li>Educational information about AI tokens and their usage</li>
+            </ul>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">3. Use License</h2>
+            <h3 class="text-xl font-medium text-stone-800 mb-3">3.1 Permitted Use</h3>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              You are granted a limited, non-exclusive, non-transferable license to use the Service for personal and commercial purposes, subject to these Terms of Service.
+            </p>
+            
+            <h3 class="text-xl font-medium text-stone-800 mb-3">3.2 Restrictions</h3>
+            <p class="text-stone-700 leading-relaxed mb-4">You may not:</p>
+            <ul class="list-disc pl-6 text-stone-700 space-y-2 mb-4">
+              <li>Attempt to reverse engineer, decompile, or disassemble the Service</li>
+              <li>Use the Service for any illegal or unauthorized purpose</li>
+              <li>Interfere with or disrupt the Service or servers connected to the Service</li>
+              <li>Attempt to gain unauthorized access to any portion of the Service</li>
+              <li>Use automated scripts or bots to access the Service excessively</li>
+              <li>Redistribute or resell the Service without explicit permission</li>
+            </ul>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">4. Accuracy of Information</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              While we strive to provide accurate token counts and pricing information, we make no warranties about the completeness, reliability, or accuracy of this information. AI model pricing and tokenization methods may change, and our calculations are estimates based on publicly available information.
+            </p>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              <strong>Important:</strong> Always verify pricing and token counts with the official AI provider before making business decisions or large-scale implementations.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">5. Privacy and Data</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              Your privacy is important to us. Our Service processes your input text locally in your browser and does not store or transmit your content to our servers. Please refer to our Privacy Policy for detailed information about how we handle your data.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">6. Disclaimer of Warranties</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              The Service is provided "as is" and "as available" without any warranties of any kind, either express or implied, including but not limited to:
+            </p>
+            <ul class="list-disc pl-6 text-stone-700 space-y-2 mb-4">
+              <li>Warranties of merchantability, fitness for a particular purpose, or non-infringement</li>
+              <li>Warranties that the Service will be uninterrupted, secure, or error-free</li>
+              <li>Warranties regarding the accuracy, reliability, or completeness of the Service</li>
+            </ul>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">7. Limitation of Liability</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              In no event shall Free Token Counter & Pricing Calculator, its owners, or contributors be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your use of the Service.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">8. Service Availability</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              We reserve the right to modify, suspend, or discontinue the Service at any time without notice. We do not guarantee that the Service will always be available or uninterrupted.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">9. Third-Party Links and Services</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              Our Service may contain links to third-party websites or services. We are not responsible for the content, privacy policies, or practices of any third-party websites or services.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">10. Intellectual Property</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              The Service and its original content, features, and functionality are owned by Free Token Counter & Pricing Calculator and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">11. Termination</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              We may terminate or suspend your access to the Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">12. Changes to Terms</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              We reserve the right to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days notice prior to any new terms taking effect.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">13. Governing Law</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              These Terms shall be interpreted and governed by the laws of the jurisdiction in which the Service is operated, without regard to its conflict of law provisions.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-stone-800 mb-4">14. Contact Information</h2>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              If you have any questions about these Terms of Service, please contact us at:
+            </p>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              <strong>Email:</strong> <a href="mailto:info@toolify100.com" class="text-blue-600 hover:text-blue-800 underline">info@toolify100.com</a>
+            </p>
+            <p class="text-stone-700 leading-relaxed mb-4">
+              You can also reach us through our website or other contact information provided on our main page.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </div>
+</BaseLayout>
